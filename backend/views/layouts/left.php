@@ -32,15 +32,12 @@
                 'items' => [
                     // ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     [
-                        'label' => '投票管理',
+                        'label' => '工作区',
                         'icon' => 'circle-o',
                         'url' => 'javascript:;',
                         'items' => [
-                            ['label' => '活动管理', 'icon' => 'circle-o', 'url' => ['/vote-manager/activity/default/index']],
-                            ['label' => '报名记录', 'icon' => 'circle-o', 'url' => ['/vote-manager/entrance/default/index']],
-                            ['label' => '投票记录', 'icon' => 'circle-o', 'url' => ['/vote-manager/vote-track/default/index']],
-                            ['label' => '用户管理', 'icon' => 'circle-o', 'url' => ['/vote-manager/user/default/index']],
-                            ['label' => '留言管理', 'icon' => 'circle-o', 'url' => ['/vote-manager/message/default/index']],
+                            ['label' => '学员管理', 'icon' => 'circle-o', 'url' => ['/work-space/student/default/index']],
+                            ['label' => '报名统计', 'icon' => 'circle-o', 'url' => ['/vote-manager/entrance/default/index']],
                         ],
                     ],
                     [
@@ -48,11 +45,10 @@
                         'icon' => 'circle-o',
                         'url' => 'javascript:;',
                         'items' => [
-                            ['label' => '礼物管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/gift/default/index']],
-                            ['label' => '活动抽奖管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/luck-draw/default/index']],
-                            ['label' => '奖品管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/award/default/index']],
-                            ['label' => '中奖记录', 'icon' => 'circle-o', 'url' => ['/financial-manager/drawn/default/index']],
-                            ['label' => '礼物订单列表', 'icon' => 'circle-o', 'url' => ['/financial-manager/gift-order/default/index']],
+                            ['label' => '卡券管理', 'icon' => 'circle-o', 'url' => ['/business/card/default/index']],
+                            ['label' => '课程管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/luck-draw/default/index']],
+                            ['label' => '每日课程管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/award/default/index']],
+                            ['label' => '常规管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/gift-order/default/index']],
                         ],
                     ],
                     // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],

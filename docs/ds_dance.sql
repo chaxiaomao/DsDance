@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-03-05 18:06:09
+Date: 2019-03-06 00:27:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -147,11 +147,12 @@ CREATE TABLE `ds_course` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_course
 -- ----------------------------
+INSERT INTO `ds_course` VALUES ('1', 'Jazz', 'Jazz', '1', '2019-03-05 13:43:58', '2019-03-05 13:43:58');
 
 -- ----------------------------
 -- Table structure for ds_daily_course
@@ -171,11 +172,12 @@ CREATE TABLE `ds_daily_course` (
   KEY `Index_1` (`id`),
   KEY `Index_2` (`course_id`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_daily_course
 -- ----------------------------
+INSERT INTO `ds_daily_course` VALUES ('1', '1', '2', '2019-03-08 00:00:00', '18:00', '10', '1', '2019-03-05 14:36:36', '2019-03-05 14:36:36');
 
 -- ----------------------------
 -- Table structure for ds_fe_user
@@ -254,18 +256,20 @@ CREATE TABLE `ds_menu` (
 DROP TABLE IF EXISTS `ds_user_business`;
 CREATE TABLE `ds_user_business` (
   `user_id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `remain` bigint(20) DEFAULT NULL,
   `period` datetime DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `Index_1` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_user_business
 -- ----------------------------
-INSERT INTO `ds_user_business` VALUES ('2', '0', '2019-03-05 00:00:00', '1', '2019-03-05 09:29:09', '2019-03-05 09:29:09');
+INSERT INTO `ds_user_business` VALUES ('2', '1', '10', '2019-04-04 00:00:00', '1', '2019-03-05 09:29:09', '2019-03-05 13:17:36');
 
 -- ----------------------------
 -- Table structure for ds_user_card_rs
@@ -275,20 +279,19 @@ CREATE TABLE `ds_user_card_rs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
   `card_id` bigint(20) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`user_id`),
   KEY `Index_2` (`card_id`),
   KEY `Index_3` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_user_card_rs
 -- ----------------------------
 INSERT INTO `ds_user_card_rs` VALUES ('1', '2', '1', null, '2019-03-05 10:50:19', '2019-03-05 10:50:19');
-INSERT INTO `ds_user_card_rs` VALUES ('2', '2', '1', null, '2019-03-05 10:52:55', '2019-03-05 10:52:55');
 
 -- ----------------------------
 -- Table structure for ds_user_entrance
@@ -319,7 +322,7 @@ CREATE TABLE `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of migration

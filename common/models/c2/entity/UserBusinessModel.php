@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "{{%user_business}}".
  *
  * @property string $user_id
+ * @property string $id
  * @property integer $remain
  * @property string $period
  * @property integer $status
@@ -31,9 +32,9 @@ class UserBusinessModel extends \cza\base\models\ActiveRecord
     {
         return [
             [['user_id'], 'required'],
-            [['user_id', 'remain'], 'integer'],
+            [['user_id', 'id', 'remain'], 'integer'],
             [['period', 'created_at', 'updated_at'], 'safe'],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'integer', 'max' => 4],
         ];
     }
 

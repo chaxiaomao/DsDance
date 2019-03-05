@@ -1,30 +1,29 @@
 <?php
 
-namespace backend\modules\WorkSpace\modules\Student\controllers;
+namespace backend\modules\WorkSpace\modules\Course\controllers;
 
-use common\models\c2\entity\UserCardRsModel;
 use Yii;
-use common\models\c2\entity\FeUserModel;
-use common\models\c2\search\FeUserSearch;
+use common\models\c2\entity\CourseModel;
+use common\models\c2\search\CourseSearch;
 
 use cza\base\components\controllers\backend\ModelController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DefaultController implements the CRUD actions for FeUserModel model.
+ * DefaultController implements the CRUD actions for CourseModel model.
  */
 class DefaultController extends Controller
 {
-    public $modelClass = 'common\models\c2\entity\FeUserModel';
+    public $modelClass = 'common\models\c2\entity\CourseModel';
     
     /**
-     * Lists all FeUserModel models.
+     * Lists all CourseModel models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new FeUserSearch();
+        $searchModel = new CourseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -35,7 +34,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a single FeUserModel model.
+     * Displays a single CourseModel model.
      * @param string $id
      * @return mixed
      */
@@ -47,7 +46,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * create/update a FeUserModel model.
+     * create/update a CourseModel model.
      * fit to pajax call
      * @return mixed
      */
@@ -67,42 +66,18 @@ class DefaultController extends Controller
     }
     
     /**
-     * Finds the FeUserModel model based on its primary key value.
+     * Finds the CourseModel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return FeUserModel the loaded model
+     * @return CourseModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = FeUserModel::findOne($id)) !== null) {
+        if (($model = CourseModel::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-    public function actionAddCard() {
-        $this->layout = '/empty';
-        $model = new UserCardRsModel();
-        $id = null;
-        if (Yii::$app->request->isPost) {
-            $id = Yii::$app->request->post(basename(get_class($model)))['user_id'];
-        } else {
-            $id = Yii::$app->request->get('user_id');
-        }
-        $user = FeUserModel::findOne(['id' => $id]);
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                Yii::$app->session->setFlash($model->getMessageName(), [Yii::t('app.c2', 'Saved successful.')]);
-            } else {
-                Yii::$app->session->setFlash($model->getMessageName(), $model->errors);
-            }
-        }
-        return $this->render('add_card_form', [
-            'model' => $model,
-            'user' => $user,
-        ]);
-    }
-
 }

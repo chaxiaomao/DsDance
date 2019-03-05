@@ -237,7 +237,11 @@ return [
     'Count Value' => '次数',
     'Period' => '有效期',
     'Mobile Number' => '手机号码',
-    '' => '',
+    'Teacher' => '老师',
+    'Course' => '课程',
+    'Course Date' => '上课日期',
+    'Course Time' => '上课时间',
+    'Course Remain' => '上课人数',
     '' => '',
 ];
 

@@ -1,35 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/5
- * Time: 16:58
- */
 
-use cza\base\widgets\ui\adminlte2\InfoBox;
+use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
-use yii\helpers\Html;
+use cza\base\widgets\ui\adminlte2\InfoBox;
 use cza\base\models\statics\EntityModelStatus;
-use yii\widgets\Pjax;
 
+$regularLangName = \Yii::$app->czaHelper->getRegularLangName();
 $messageName = $model->getMessageName();
 ?>
 
-<?php Pjax::begin(['id' => $model->getDetailPjaxName(), 'formSelector' => $model->getBaseFormName(true), 'enablePushState' => false, 'clientOptions' => [
-    'skipOuterContainers' => true
-]]) ?>
-
 <?php
 $form = ActiveForm::begin([
-    'action' => ['add-card', 'id' => $model->id],
+    'action' => ['edit', 'id' => $model->id],
     'options' => [
         'id' => $model->getBaseFormName(),
         'data-pjax' => true,
     ]]);
 ?>
-<div class="<?= $model->getPrefixName('form') ?>">
 
+<div class="<?= $model->getPrefixName('form') ?>
+">
     <?php if (Yii::$app->session->hasFlash($messageName)): ?>
         <?php if (!$model->hasErrors()) {
             echo InfoBox::widget([
@@ -50,24 +41,18 @@ $form = ActiveForm::begin([
         echo Form::widget([
             'model' => $model,
             'form' => $form,
-            'columns' => 1,
+            'columns' => 2,
             'attributes' => [
-                // 'registration_src_type' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => []],
-                'username' => ['type' => Form::INPUT_TEXT, 'options' => [
-                    'placeholder' => $model->getAttributeLabel('username'),
-                    'value' => $user->username
-                ]],
-                'card_id' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => \common\models\c2\entity\CardModel::getCards()],
+                'name' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('name')]],
+                'label' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('label')]],
+                'status' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => EntityModelStatus::getHashMap('id', 'label')],
             ]
         ]);
-        echo $form->field($model, 'user_id', [])->label(false)->hiddenInput(['value' => $user->id]);
         echo Html::beginTag('div', ['class' => 'box-footer']);
         echo Html::submitButton('<i class="fa fa-save"></i> ' . Yii::t('app.c2', 'Save'), ['type' => 'button', 'class' => 'btn btn-primary pull-right']);
+        echo Html::a('<i class="fa fa-arrow-left"></i> ' . Yii::t('app.c2', 'Go Back'), ['index'], ['data-pjax' => '0', 'class' => 'btn btn-default pull-right', 'title' => Yii::t('app.c2', 'Go Back'),]);
         echo Html::endTag('div');
         ?>
     </div>
-
 </div>
-
 <?php ActiveForm::end(); ?>
-<?php Pjax::end() ?>

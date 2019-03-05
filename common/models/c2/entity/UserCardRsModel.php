@@ -62,15 +62,17 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
     {
         return new \common\models\c2\query\UserCardRsQuery(get_called_class());
     }
-    
+
     /**
-    * setup default values
-    **/
-    public function loadDefaultValues($skipIfSet = true) {
+     * setup default values
+     **/
+    public function loadDefaultValues($skipIfSet = true)
+    {
         parent::loadDefaultValues($skipIfSet);
     }
 
-    public function getCard() {
+    public function getCard()
+    {
         return $this->hasOne(CardModel::className(), ['id' => 'card_id']);
     }
 
@@ -78,7 +80,8 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
     {
         $model = UserBusinessModel::findOne(['user_id' => $this->user_id]);
         if (strtotime(date('y-m-d h:i:s', time())) > strtotime($model->period)) {
-            $model->period = date('y-m-d', strtotime("+" . $this->card->period) . "month");
+            // $model->period = date('y-m-d', strtotime("+" . $this->card->period) . "month");
+            $model->period = date('y-m-d', time() + ($this->card->period) * 24 * 60 * 60 * 30);
         } else {
             $model->period = $model->period + date('y-m-d', strtotime("+" . $this->card->period) . "month");
         }

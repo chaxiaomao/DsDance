@@ -37,18 +37,11 @@
                         'url' => 'javascript:;',
                         'items' => [
                             ['label' => '学员管理', 'icon' => 'circle-o', 'url' => ['/work-space/student/default/index']],
-                            ['label' => '报名统计', 'icon' => 'circle-o', 'url' => ['/vote-manager/entrance/default/index']],
-                        ],
-                    ],
-                    [
-                        'label' => '财务管理',
-                        'icon' => 'circle-o',
-                        'url' => 'javascript:;',
-                        'items' => [
+                            // ['label' => '报名统计', 'icon' => 'circle-o', 'url' => ['/vote-manager/entrance/default/index']],
                             ['label' => '卡券管理', 'icon' => 'circle-o', 'url' => ['/business/card/default/index']],
-                            ['label' => '课程管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/luck-draw/default/index']],
-                            ['label' => '每日课程管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/award/default/index']],
-                            ['label' => '常规管理', 'icon' => 'circle-o', 'url' => ['/financial-manager/gift-order/default/index']],
+                            ['label' => '课程管理', 'icon' => 'circle-o', 'url' => ['/work-space/course/default/index']],
+                            ['label' => '课程安排', 'icon' => 'circle-o', 'url' => ['/work-space/daily-course/default/index']],
+                            ['label' => '常规管理', 'icon' => 'circle-o', 'url' => ['/work-space/config/default/index']],
                         ],
                     ],
                     // ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],

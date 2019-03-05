@@ -1,4 +1,7 @@
 <?php
+
+use kartik\datecontrol\Module;
+
 defined('APP_ROOT') or define('APP_ROOT', dirname(__DIR__));
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -25,6 +28,12 @@ $config = [
         ],
         'business' => [
             'class' => 'backend\modules\Business\Module',
+        ],
+        'datecontrol' => [
+            'class' => 'kartik\datecontrol\Module',
+            'displaySettings' => [
+                Module::FORMAT_DATE => 'yyyy-MM-dd',
+            ],
         ],
     ],
     "aliases" => [

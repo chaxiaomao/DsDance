@@ -24,6 +24,18 @@ class Module extends \yii\base\Module
             'student' => [
                 'class' => 'backend\modules\WorkSpace\modules\Student\Module',
             ],
+            'course' => [
+                'class' => 'backend\modules\WorkSpace\modules\Course\Module',
+            ],
+            'daily-course' => [
+                'class' => 'backend\modules\WorkSpace\modules\DailyCourse\Module',
+            ],
+            'user-entrance' => [
+                'class' => 'backend\modules\WorkSpace\modules\UserEntrance\Module',
+            ],
+            'config' => [
+                'class' => 'backend\modules\WorkSpace\modules\Config\Module',
+            ],
         ];
     }
 }

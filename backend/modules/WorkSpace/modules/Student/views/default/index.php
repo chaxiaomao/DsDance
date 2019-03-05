@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-target' => '#add-modal',
                                 'data-id' => $key,
                                 'data-pjax' => '0',
-                                'data-value' => Url::toRoute(['add-card', 'id' => $model->id]),
+                                'data-value' => Url::toRoute(['add-card', 'user_id' => $model->id]),
                             ]);
                         },
                         'update' => function ($url, $model, $key) {

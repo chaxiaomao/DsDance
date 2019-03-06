@@ -79,12 +79,10 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
         $model = UserBusinessModel::findOne(['user_id' => $this->user_id]);
         if (strtotime(date('y-m-d h:i:s', time())) > strtotime($model->period)) {
             // 过期
-            // $model->period = date('y-m-d', strtotime("+" . $this->card->period) . "month");
-            $model->period = date('y-m-d',time() + ($this->card->period) * 24 * 60 * 60 * 30);
+            $model->period = date('y-m-d',strtotime("+" . $this->card->period . "month"));
             $model->remain = $this->card->value;
         } else {
-            // $model->period = $model->period + date('y-m-d', strtotime("+" . $this->card->period) . "month");
-            $model->period = date('y-m-d', (strtotime($model->period) + (($this->card->period) * 24 * 60 * 60 * 30)));
+            $model->period = date('y-m-d', strtotime("+" . $this->card->period . "month", strtotime($model->period)));
             $model->remain += $this->card->value;
         }
         $model->save();

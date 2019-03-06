@@ -2,6 +2,7 @@
 
 namespace common\models\c2\entity;
 
+use common\models\c2\statics\UserLevel;
 use cza\base\models\statics\EntityModelStatus;
 use Yii;
 
@@ -150,7 +151,7 @@ class FeUserModel extends \cza\base\models\ActiveRecord
     }
 
     public static function getUserHashMap() {
-        $models = self::find()->where(['status' => EntityModelStatus::STATUS_ACTIVE])->all();
+        $models = self::find()->where(['status' => EntityModelStatus::STATUS_ACTIVE, 'level' => UserLevel::TYPE_TEACHER])->all();
         $arrs = [];
         foreach ($models as $model) {
             $arrs[$model->id] = $model->username;

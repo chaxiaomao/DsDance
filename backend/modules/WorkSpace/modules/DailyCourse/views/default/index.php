@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
                     'view' => function ($url, $model, $key) {
-                        return Html::a('查看报名', ['/work-space/user-entrance/default/index', 'id' => $model->id], [
+                        return Html::a('查看报名', ['/work-space/user-entrance/default/index', 'UserEntranceSearch[id]' => $model->id], [
                             'title' => Yii::t('app.c2', 'Info'),
                             'data-pjax' => '0',
                         ]);

@@ -47,7 +47,7 @@ $form = ActiveForm::begin([
                 'username' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('username')]],
                 'open_id' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('open_id')]],
                 'mobile_number' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('mobile_number')]],
-                'remain' => ['type' => Form::INPUT_TEXT, 'label' => '次数', 'options' => ['disabled' => true]],
+                'remain' => ['type' => Form::INPUT_TEXT, 'label' => '次数', 'options' => ['disabled' => true, 'value' => $model->userBusiness->remain]],
                 'status' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => EntityModelStatus::getHashMap('id', 'label')],
                 'position' => ['type' => Form::INPUT_WIDGET, 'widgetClass' => '\kartik\touchspin\TouchSpin', 'options' => [
                     'pluginOptions' => [

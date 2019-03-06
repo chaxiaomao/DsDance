@@ -68,13 +68,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'remain',
                     'label' => '剩余次数',
                     'value' => function ($model) {
-                        return $model->userBusiness->remain;
+                        return $model->userBusiness == null ? '未设置' : $model->userBusiness->remain;
                     },
                 ],
                 [
                     'label' => '到期时间',
                     'value' => function ($model) {
-                        return $model->userBusiness->period;
+                        return $model->userBusiness == null ? '未设置' : date('Y-m-d', strtotime($model->userBusiness->period));
                     },
                 ],
                 // 'email:email',

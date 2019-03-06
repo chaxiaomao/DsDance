@@ -75,8 +75,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->user == null ? "未设置" : $model->user->username;
                 },
             ],
-            'status',
-            'created_at',
+            [
+                // 'attribute' => 'user_id',
+                'label' => '课程日期',
+                'value' => function($model) {
+                    $dailyCourseModel = $model->dailyCourse;
+                    return $dailyCourseModel== null ? "未设置" : date('Y-m-d', strtotime($dailyCourseModel->date));
+                },
+            ],
+            [
+                // 'attribute' => 'user_id',
+                'label' => '课程时间',
+                'value' => function($model) {
+                    $dailyCourseModel = $model->dailyCourse;
+                    return $dailyCourseModel == null ? "未设置" : $dailyCourseModel->time;
+                },
+            ],
+            // 'status',
+            // 'created_at',
             // 'updated_at',
             [
                 'attribute' => 'status',

@@ -61,7 +61,7 @@ $form = ActiveForm::begin([
                 'card_id' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => \common\models\c2\entity\CardModel::getCards()],
             ]
         ]);
-        echo $form->field($model, 'user_id', [])->label(false)->hiddenInput(['value' => $user->id]);
+        echo $form->field($model, 'user_id', [])->label(false)->hiddenInput(['value' => $user_id]);
         echo Html::beginTag('div', ['class' => 'box-footer']);
         echo Html::submitButton('<i class="fa fa-save"></i> ' . Yii::t('app.c2', 'Save'), ['type' => 'button', 'class' => 'btn btn-primary pull-right']);
         echo Html::endTag('div');

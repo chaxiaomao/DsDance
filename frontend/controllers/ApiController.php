@@ -81,6 +81,12 @@ class ApiController extends Controller
             return ['code' => '501', 'data' => false, 'message' => '抱歉，您的预约次数不足'];
         }
         $dailyCourseModel = DailyCourseModel::findOne(['id' => $daily_course_id]);
+        if (strtotime($dailyCourseModel->date) == strtotime(date('y-m-d', time()))) {
+            // 当天日期
+            if (!$this->actionTimeDiff($dailyCourseModel)) {
+                return ['code' => '501', 'data' => false, 'message' => '请提前' . Yii::$app->cache->get('expired_time') . "小时预约"];
+            }
+        }
         if (($dailyCourseModel->entrance_count - $dailyCourseModel->remain) == 0) {
             return ['code' => '501', 'data' => false, 'message' => '该课程预约已满'];
         }
@@ -119,11 +125,11 @@ class ApiController extends Controller
         $index = strpos($dailyCourseModel->time, ':');
         $hour = substr($dailyCourseModel->time, 0, $index);
         $min = substr($dailyCourseModel->time, $index + 1, strlen($dailyCourseModel->time));
-        $expired_time = 2;
-        $expired_time = Yii::$app->cache->get('expired_time');
-        if (strtotime(date('H:i', time())) > mktime($hour, $min)) {
-            return '1';
+        $expired_time = Yii::$app->cache->get('expired_time') == null ? 2 : Yii::$app->cache->get('expired_time');
+        if (mktime($hour - $expired_time, $min) > strtotime(date('H:i', time()))) {
+            return true;
         }
+        return false;
     }
 
 }

@@ -27,12 +27,8 @@ class DefaultController extends Controller
             $expired_time = Yii::$app->request->post()['BusinessConfigForm']['expired_time'];
             $notice = Yii::$app->request->post()['BusinessConfigForm']['notice'];
             $cache = Yii::$app->cache;
-            if ($cache->get('expired_time') === false) {
-                $cache->set('expired_time', $expired_time);
-            }
-            if ($cache->get('notice') === false) {
-                $cache->set('notice', $notice);
-            }
+            $cache->set('expired_time', $expired_time);
+            $cache->set('notice', $notice);
             Yii::$app->session->setFlash('business-config-form-message', [Yii::t('app.c2', 'Saved successful.')]);
         }
         return $this->render('index', [

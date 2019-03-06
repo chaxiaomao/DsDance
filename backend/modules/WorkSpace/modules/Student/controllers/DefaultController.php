@@ -91,7 +91,6 @@ class DefaultController extends Controller
         } else {
             $id = Yii::$app->request->get('user_id');
         }
-        var_dump($id);
         $user = FeUserModel::findOne(['id' => $id]);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {

@@ -17,8 +17,6 @@ use Yii;
 class UserCardRsModel extends \cza\base\models\ActiveRecord
 {
 
-    public $username;
-
     /**
      * @inheritdoc
      */

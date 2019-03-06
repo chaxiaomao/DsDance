@@ -83,7 +83,8 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
             // $model->period = date('y-m-d', strtotime("+" . $this->card->period) . "month");
             $model->period = date('y-m-d', time() + ($this->card->period) * 24 * 60 * 60 * 30);
         } else {
-            $model->period = $model->period + date('y-m-d', strtotime("+" . $this->card->period) . "month");
+            // $model->period = $model->period + date('y-m-d', strtotime("+" . $this->card->period) . "month");
+            $model->period = date('y-m-d', (strtotime($model->period) + (($this->card->period) * 24 * 60 * 60 * 30)));
         }
         $model->remain += $this->card->value;
         $model->save();

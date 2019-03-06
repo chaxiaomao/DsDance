@@ -91,8 +91,8 @@ class DefaultController extends Controller
         } else {
             $id = Yii::$app->request->get('user_id');
         }
+        var_dump($id);
         $user = FeUserModel::findOne(['id' => $id]);
-        Yii::info($user->username);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash($model->getMessageName(), [Yii::t('app.c2', 'Saved successful.')]);

@@ -23,58 +23,20 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CourseSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if (Yii::$app->request->isPost) {
+            $expired_time = Yii::$app->request->post()['BusinessConfigForm']['expired_time'];
+            $notice = Yii::$app->request->post()['BusinessConfigForm']['notice'];
+            $cache = Yii::$app->cache;
+            if ($cache->get('expired_time') === false) {
+                $cache->set('expired_time', $expired_time);
+            }
+            if ($cache->get('notice') === false) {
+                $cache->set('notice', $notice);
+            }
+            Yii::$app->session->setFlash('business-config-form-message', [Yii::t('app.c2', 'Saved successful.')]);
+        }
         return $this->render('index', [
         ]);
     }
 
-    /**
-     * Displays a single CourseModel model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * create/update a CourseModel model.
-     * fit to pajax call
-     * @return mixed
-     */
-    public function actionEdit($id = null) 
-    {
-        $model = $this->retrieveModel($id);
-        
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                Yii::$app->session->setFlash($model->getMessageName(), [Yii::t('app.c2', 'Saved successful.')]);
-            } else {
-                Yii::$app->session->setFlash($model->getMessageName(), $model->errors);
-            }
-        }
-        
-        return (Yii::$app->request->isAjax) ? $this->renderAjax('edit', [ 'model' => $model,]) : $this->render('edit', [ 'model' => $model,]);
-    }
-    
-    /**
-     * Finds the CourseModel model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return CourseModel the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = CourseModel::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
 }

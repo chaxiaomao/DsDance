@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-03-06 00:27:40
+Date: 2019-03-06 15:52:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -164,6 +164,7 @@ CREATE TABLE `ds_daily_course` (
   `user_id` bigint(20) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
+  `entrance_count` int(11) DEFAULT NULL,
   `remain` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
@@ -172,12 +173,12 @@ CREATE TABLE `ds_daily_course` (
   KEY `Index_1` (`id`),
   KEY `Index_2` (`course_id`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_daily_course
 -- ----------------------------
-INSERT INTO `ds_daily_course` VALUES ('1', '1', '2', '2019-03-08 00:00:00', '18:00', '10', '1', '2019-03-05 14:36:36', '2019-03-05 14:36:36');
+INSERT INTO `ds_daily_course` VALUES ('16', '1', '2', '2019-03-10 00:00:00', '9:30', '8', '5', '1', '2019-03-06 04:09:11', '2019-03-06 07:52:00');
 
 -- ----------------------------
 -- Table structure for ds_fe_user
@@ -223,12 +224,14 @@ CREATE TABLE `ds_fe_user` (
   KEY `Index_5` (`wechat_open_id`),
   KEY `Index_6` (`access_token`,`status`),
   KEY `Index_7` (`mobile_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_fe_user
 -- ----------------------------
-INSERT INTO `ds_fe_user` VALUES ('2', '0', '0', 'xun', null, null, null, null, null, null, null, '100', null, null, null, null, '', null, null, '1562296560', null, null, null, '0', '0', '0', '0', '1', '0', '2019-03-05 09:29:09', '2019-03-05 09:29:09');
+INSERT INTO `ds_fe_user` VALUES ('2', '0', '0', 'xun', null, null, null, null, null, null, null, '100', null, null, null, null, '', null, null, '15622965560', null, null, null, '0', '0', '0', '0', '1', '0', '2019-03-05 09:29:09', '2019-03-05 09:29:09');
+INSERT INTO `ds_fe_user` VALUES ('3', '0', '0', 'xun1', null, null, null, null, null, null, null, '100', null, null, null, null, '', null, null, '15622965561', null, null, null, '0', '0', '0', '0', '1', '0', '2019-03-06 03:51:43', '2019-03-06 03:51:43');
+INSERT INTO `ds_fe_user` VALUES ('4', '0', '0', 'mo', null, null, null, null, null, null, null, '100', null, null, null, null, '', null, null, '13286326255', null, null, null, '0', '0', '0', '0', '1', '0', '2019-03-06 07:24:50', '2019-03-06 07:24:50');
 
 -- ----------------------------
 -- Table structure for ds_menu
@@ -264,12 +267,14 @@ CREATE TABLE `ds_user_business` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_user_business
 -- ----------------------------
-INSERT INTO `ds_user_business` VALUES ('2', '1', '10', '2019-04-04 00:00:00', '1', '2019-03-05 09:29:09', '2019-03-05 13:17:36');
+INSERT INTO `ds_user_business` VALUES ('2', '1', '9', '2019-03-04 00:00:00', '1', '2019-03-05 09:29:09', '2019-03-06 04:56:37');
+INSERT INTO `ds_user_business` VALUES ('3', '2', '0', '2019-03-06 00:00:00', '1', '2019-03-06 03:51:44', '2019-03-06 03:51:44');
+INSERT INTO `ds_user_business` VALUES ('4', '3', '6', '2019-04-05 00:00:00', '1', '2019-03-06 07:24:50', '2019-03-06 07:52:00');
 
 -- ----------------------------
 -- Table structure for ds_user_card_rs
@@ -286,12 +291,13 @@ CREATE TABLE `ds_user_card_rs` (
   KEY `Index_1` (`user_id`),
   KEY `Index_2` (`card_id`),
   KEY `Index_3` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_user_card_rs
 -- ----------------------------
 INSERT INTO `ds_user_card_rs` VALUES ('1', '2', '1', null, '2019-03-05 10:50:19', '2019-03-05 10:50:19');
+INSERT INTO `ds_user_card_rs` VALUES ('13', '4', '1', '1', '2019-03-06 07:29:06', '2019-03-06 07:29:06');
 
 -- ----------------------------
 -- Table structure for ds_user_entrance
@@ -308,11 +314,16 @@ CREATE TABLE `ds_user_entrance` (
   KEY `Index_1` (`id`),
   KEY `Index_2` (`daily_course_id`),
   KEY `Index_3` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ds_user_entrance
 -- ----------------------------
+INSERT INTO `ds_user_entrance` VALUES ('1', '16', '2', '1', '2019-03-06 04:56:37', '2019-03-06 04:56:37');
+INSERT INTO `ds_user_entrance` VALUES ('2', '16', '4', '1', '2019-03-06 07:29:09', '2019-03-06 07:29:09');
+INSERT INTO `ds_user_entrance` VALUES ('3', '16', '4', '1', '2019-03-06 07:49:03', '2019-03-06 07:49:03');
+INSERT INTO `ds_user_entrance` VALUES ('4', '16', '4', '1', '2019-03-06 07:50:54', '2019-03-06 07:50:54');
+INSERT INTO `ds_user_entrance` VALUES ('5', '16', '4', '1', '2019-03-06 07:52:00', '2019-03-06 07:52:00');
 
 -- ----------------------------
 -- Table structure for migration

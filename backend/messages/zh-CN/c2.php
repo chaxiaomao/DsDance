@@ -241,7 +241,8 @@ return [
     'Course' => '课程',
     'Course Date' => '上课日期',
     'Course Time' => '上课时间',
-    'Course Remain' => '上课人数',
+    'Course Remain' => '已报名人数',
+    'Course Entrance Count' => '上课人数',
     '' => '',
 ];
 

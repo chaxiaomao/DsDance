@@ -18,7 +18,7 @@ class DailyCourseModel extends DailyCourseModelModel
     public function rules()
     {
         return [
-            [['id', 'course_id', 'user_id', 'remain'], 'integer'],
+            [['id', 'course_id', 'user_id', 'entrance_count', 'remain'], 'integer'],
             [['date', 'time', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -67,6 +67,7 @@ class DailyCourseModel extends DailyCourseModelModel
             'course_id' => $this->course_id,
             'user_id' => $this->user_id,
             'date' => $this->date,
+            'entrance_count' => $this->entrance_count,
             'remain' => $this->remain,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

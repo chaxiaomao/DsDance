@@ -2,6 +2,8 @@
 
 namespace backend\modules\WorkSpace\modules\DailyCourse\controllers;
 
+use common\models\c2\entity\CourseModel;
+use common\models\c2\entity\FeUserModel;
 use Yii;
 use common\models\c2\entity\DailyCourseModel;
 use common\models\c2\search\DailyCourseModel as DailyCourseModelSearch;
@@ -16,7 +18,7 @@ use yii\filters\VerbFilter;
 class DefaultController extends Controller
 {
     public $modelClass = 'common\models\c2\entity\DailyCourseModel';
-    
+
     /**
      * Lists all DailyCourseModel models.
      * @return mixed
@@ -50,10 +52,10 @@ class DefaultController extends Controller
      * fit to pajax call
      * @return mixed
      */
-    public function actionEdit($id = null) 
+    public function actionEdit($id = null)
     {
         $model = $this->retrieveModel($id);
-        
+
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash($model->getMessageName(), [Yii::t('app.c2', 'Saved successful.')]);
@@ -61,10 +63,10 @@ class DefaultController extends Controller
                 Yii::$app->session->setFlash($model->getMessageName(), $model->errors);
             }
         }
-        
-        return (Yii::$app->request->isAjax) ? $this->renderAjax('edit', [ 'model' => $model,]) : $this->render('edit', [ 'model' => $model,]);
+
+        return (Yii::$app->request->isAjax) ? $this->renderAjax('edit', ['model' => $model,]) : $this->render('edit', ['model' => $model,]);
     }
-    
+
     /**
      * Finds the DailyCourseModel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

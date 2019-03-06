@@ -27,23 +27,32 @@ return [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
-                [
+                'backendLog' => [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'logFile' => "@runtime/logs/backend_info.log",
+                    'categories' => ['application'],
+                    'levels' => ['info', 'trace'],
+                    // belows setting will keep the log fresh
+                    'maxFileSize' => 0,
+                    'maxLogFiles' => 0,
+                ],
+                'backendSql' => [
+                    'class' => 'yii\log\FileTarget',
+                    'logFile' => "@runtime/logs/backend_sql.log",
+                    'categories' => ['yii\db\*'],
+                    'levels' => ['info'],
                 ],
             ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

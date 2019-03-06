@@ -9,9 +9,11 @@ return [
     ],
     'vendorPath' => $vendorDir,
     'extensions' => require($vendorDir . '/cza/yii2-base/extensions.php'),
+    'timeZone' => 'Asia/Shanghai',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath' => '@common/runtime/cache'
         ],
         'settings' => ['class' => 'common\components\Settings',],
         'authManager' => [

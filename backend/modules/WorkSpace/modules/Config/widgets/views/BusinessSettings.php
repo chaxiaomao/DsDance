@@ -34,7 +34,7 @@ $messageName = $model->getMessageName();
 
 <?php
 $form = ActiveForm::begin([
-    'action' => ['params-save',],
+    'action' => ['index',],
     'options' => [
         'id' => $model->getBaseFormName(),
         'data-pjax' => false,
@@ -48,7 +48,7 @@ $form = ActiveForm::begin([
             'form' => $form,
             'columns' => 1,
             'attributes' => [
-                'expired_hours' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => "设置禁止预约课程的提前时间，如：3"]],
+                'expired_time' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => "设置禁止预约课程的提前时间，如：3"]],
                 'notice' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('notice')]],
             ]
         ]);

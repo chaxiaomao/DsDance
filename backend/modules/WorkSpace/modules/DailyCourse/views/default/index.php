@@ -82,7 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'time',
-            // 'remain',
+            'remain',
+            'entrance_count',
             // 'status',
             // 'created_at',
             // 'updated_at',

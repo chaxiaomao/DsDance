@@ -72,6 +72,9 @@ class ApiController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $user_id = Yii::$app->request->post('user_id');
+        if (is_null($user_id)) {
+            return ['code' => '501', 'data' => false, 'message' => '请先验证手机号码'];
+        }
         $daily_course_id = Yii::$app->request->post('daily_course_id');
         $business = UserBusinessModel::findOne(['user_id' => $user_id]);
         if (strtotime(time()) > strtotime($business->period)) {

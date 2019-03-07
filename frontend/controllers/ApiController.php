@@ -13,6 +13,7 @@ use common\models\c2\entity\FeUserModel;
 use common\models\c2\entity\UserBusinessModel;
 use common\models\c2\entity\UserEntranceModel;
 use common\models\c2\search\DailyCourseModel;
+use cza\base\models\statics\EntityModelStatus;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -31,7 +32,9 @@ class ApiController extends Controller
         if ($uid) {
             $records = UserEntranceModel::find()->where(['user_id' => $uid])->all();
         }
-        $models = \common\models\c2\entity\DailyCourseModel::find()->where(['date' => $date])->all();
+        $models = \common\models\c2\entity\DailyCourseModel::find()->where(['date' => $date])
+            ->filterWhere(['status' => EntityModelStatus::STATUS_ACTIVE])
+            ->all();
         $data = [];
         foreach ($models as $model) {
             $params = [
@@ -60,7 +63,7 @@ class ApiController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $mobile = Yii::$app->request->post('mobile');
-        $user = FeUserModel::findOne(['mobile_number' => $mobile]);
+        $user = FeUserModel::findOne(['mobile_number' => $mobile, 'status' => EntityModelStatus::STATUS_ACTIVE]);
         if ($user) {
             return ['code' => '000', 'data' => ['id' => $user->id]];
         } else {
@@ -72,6 +75,10 @@ class ApiController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $user_id = Yii::$app->request->post('user_id');
+        $user = FeUserModel::findOne(['id' => $user_id, 'status' => EntityModelStatus::STATUS_ACTIVE]);
+        if (!$user) {
+            return ['code' => '501', 'data' => false, 'message' => '抱歉，您的会员已到期'];
+        }
         $daily_course_id = Yii::$app->request->post('daily_course_id');
         $business = UserBusinessModel::findOne(['user_id' => $user_id]);
         if (strtotime(time()) > strtotime($business->period)) {

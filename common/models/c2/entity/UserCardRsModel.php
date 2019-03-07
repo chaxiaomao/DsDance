@@ -46,8 +46,8 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
     {
         return [
             'id' => Yii::t('app.c2', 'ID'),
-            'user_id' => Yii::t('app.c2', 'User ID'),
-            'card_id' => Yii::t('app.c2', 'Card ID'),
+            'user_id' => Yii::t('app.c2', 'User'),
+            'card_id' => Yii::t('app.c2', 'Card'),
             'status' => Yii::t('app.c2', 'Status'),
             'created_at' => Yii::t('app.c2', 'Created At'),
             'updated_at' => Yii::t('app.c2', 'Updated At'),
@@ -74,6 +74,11 @@ class UserCardRsModel extends \cza\base\models\ActiveRecord
     public function getCard()
     {
         return $this->hasOne(CardModel::className(), ['id' => 'card_id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(FeUserModel::className(), ['id' => 'user_id']);
     }
 
     public function afterSave($insert, $changedAttributes)

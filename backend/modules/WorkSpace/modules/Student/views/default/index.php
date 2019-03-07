@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => '\kartik\grid\ActionColumn',
-                    'template' => '{add} {view} {update} {delete}',
+                    'template' => '{add} {view} {card-record} {update} {delete}',
                     'buttons' => [
                         'add' => function ($url, $model, $key) {
                             return Html::a('添加卡券', '#', [
@@ -138,6 +138,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'title' => Yii::t('app', 'Info'),
                                 'data-pjax' => '0',
                             ]);
+                        },
+                        'card-record' => function ($url, $model, $key) {
+                            return Html::a('查看卡券', Url::toRoute(['/work-space/user-card-record/default/index', 'UserCardRsSearch[user_id]' => $model->id]));
                         },
                     ]
                 ],

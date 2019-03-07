@@ -36,6 +36,9 @@ class Module extends \yii\base\Module
             'config' => [
                 'class' => 'backend\modules\WorkSpace\modules\Config\Module',
             ],
+            'user-card-record' => [
+                'class' => 'backend\modules\WorkSpace\modules\UserCardRecord\Module',
+            ],
         ];
     }
 }

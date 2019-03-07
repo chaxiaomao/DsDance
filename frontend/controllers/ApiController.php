@@ -32,8 +32,8 @@ class ApiController extends Controller
         if ($uid) {
             $records = UserEntranceModel::find()->where(['user_id' => $uid])->all();
         }
-        $models = \common\models\c2\entity\DailyCourseModel::find()->where(['date' => $date])
-            ->filterWhere(['status' => EntityModelStatus::STATUS_ACTIVE])
+        $models = \common\models\c2\entity\DailyCourseModel::find()
+            ->where(['date' => $date, 'status' => EntityModelStatus::STATUS_ACTIVE])
             ->all();
         $data = [];
         foreach ($models as $model) {

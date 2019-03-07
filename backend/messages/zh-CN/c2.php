@@ -243,6 +243,8 @@ return [
     'Course Time' => '上课时间',
     'Course Remain' => '已报名人数',
     'Course Entrance Count' => '上课人数',
+    'Level' => '身份',
+    'Student' => '学员',
     '' => '',
 ];
 

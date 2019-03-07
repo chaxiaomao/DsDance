@@ -1,7 +1,7 @@
 <?php
 
+use kartik\date\DatePicker;
 use kartik\datecontrol\DateControl;
-use kartik\datecontrol\Module;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
@@ -65,6 +65,19 @@ $form = ActiveForm::begin([
                         ]
                     ],
                 ],
+                // 'date' => [
+                //     'type' => Form::INPUT_WIDGET,
+                //     'widgetClass' => '\kartik\widgets\DateTimePicker',
+                //     'value' => date('yyyy-mm-dd', strtotime($model->date)),
+                //     'options' => [
+                //         'value' => date('yyyy-mm-dd', strtotime($model->date)),
+                //         'options' => ['placeholder' => Yii::t('app.c2', 'Date Time...')],
+                //         'pluginOptions' => [
+                //             'format' => 'yyyy-mm-dd',
+                //             'autoclose' => true
+                //         ],
+                //     ],
+                // ],
                 'date' => [
                     'type' => Form::INPUT_WIDGET,
                     'widgetClass' => DateControl::classname(),
@@ -76,7 +89,19 @@ $form = ActiveForm::begin([
                                 'autoclose' => true
                             ]
                         ]
-                    ],],
+                    ],
+                ],
+                // 'date' => [
+                //     'type' => Form::INPUT_WIDGET,
+                //     'widgetClass' => DatePicker::className(),
+                //     'value' => date('Y-m-d', strtotime($model->date)),
+                //     'options' => [
+                //         'pluginOptions' => [
+                //             'autoclose'=>true,
+                //             'format' => 'yyyy-mm-dd'
+                //         ]
+                //     ],
+                // ],
                 'time' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('time')]],
                 'entrance_count' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('entrance_count')]],
                 'remain' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => $model->getAttributeLabel('remain')]],

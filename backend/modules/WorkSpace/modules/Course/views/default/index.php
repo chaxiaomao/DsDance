@@ -28,20 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'toolbar' => [
             [
                 'content' =>
-                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['edit'], [
-                    'class' => 'btn btn-success',
-                    'title' => Yii::t('app.c2', 'Add'),
-                    'data-pjax' => '0',
-                ]) . ' ' .
-                Html::button('<i class="glyphicon glyphicon-remove"></i>', [
-                    'class' => 'btn btn-danger',
-                    'title' => Yii::t('app.c2', 'Delete Selected Items'),
-                    'onClick' => "jQuery(this).trigger('" . OperationEvent::DELETE_BY_IDS . "', {url:'" . Url::toRoute('multiple-delete') . "'});",
-                ]) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-repeat"></i>', Url::current(), [
-                    'class' => 'btn btn-default',
-                    'title' => Yii::t('app.c2', 'Reset Grid')
-                ]),
+                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['edit'], [
+                        'class' => 'btn btn-success',
+                        'title' => Yii::t('app.c2', 'Add'),
+                        'data-pjax' => '0',
+                    ]) . ' ' .
+                    Html::button('<i class="glyphicon glyphicon-remove"></i>', [
+                        'class' => 'btn btn-danger',
+                        'title' => Yii::t('app.c2', 'Delete Selected Items'),
+                        'onClick' => "jQuery(this).trigger('" . OperationEvent::DELETE_BY_IDS . "', {url:'" . Url::toRoute('multiple-delete') . "'});",
+                    ]) . ' ' .
+                    Html::a('<i class="glyphicon glyphicon-repeat"></i>', Url::current(), [
+                        'class' => 'btn btn-default',
+                        'title' => Yii::t('app.c2', 'Reset Grid')
+                    ]),
             ],
             '{export}',
             '{toggleData}',
@@ -59,10 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return GridView::ROW_COLLAPSED;
                 },
             ],
-                        'id',
-            'name',
-            'label',
-            'status',
+            'id',
+            // 'name',
+            // 'label',
+            [
+                'attribute' => 'label',
+                'label' => '课程名称',
+            ],
+            // 'status',
             'created_at',
             // 'updated_at',
             [
@@ -75,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'displayValueConfig' => EntityModelStatus::getHashMap('id', 'label'),
                 ],
                 'filter' => EntityModelStatus::getHashMap('id', 'label'),
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->getStatusLabel();
                 }
             ],
@@ -84,13 +88,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'update' => function ($url, $model, $key) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['edit', 'id' => $model->id], [
-                                    'title' => Yii::t('app', 'Info'),
-                                    'data-pjax' => '0',
+                            'title' => Yii::t('app', 'Info'),
+                            'data-pjax' => '0',
                         ]);
                     }
-                        ]
-                    ],
-        
+                ]
+            ],
+
         ],
     ]); ?>
 

@@ -91,7 +91,6 @@ class DefaultController extends Controller
         } else {
             $id = Yii::$app->request->get('user_id');
         }
-        $user = FeUserModel::findOne(['id' => $id]);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash($model->getMessageName(), [Yii::t('app.c2', 'Saved successful.')]);
@@ -101,7 +100,7 @@ class DefaultController extends Controller
         }
         return $this->render('add_card_form', [
             'model' => $model,
-            'user' => $user,
+            'user_id' => $id,
         ]);
     }
 

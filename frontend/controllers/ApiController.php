@@ -75,6 +75,9 @@ class ApiController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $user_id = Yii::$app->request->post('user_id');
+        if (is_null($user_id)) {
+            return ['code' => '501', 'data' => false, 'message' => '请先验证手机号码'];
+        }
         $user = FeUserModel::findOne(['id' => $user_id, 'status' => EntityModelStatus::STATUS_ACTIVE]);
         if (!$user) {
             return ['code' => '501', 'data' => false, 'message' => '抱歉，您的会员已到期'];

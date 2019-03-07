@@ -49,8 +49,8 @@ class DailyCourseModel extends \cza\base\models\ActiveRecord
     {
         return [
             'id' => Yii::t('app.c2', 'ID'),
-            'user_id' => Yii::t('app.c2', 'Course'),
-            'course_id' => Yii::t('app.c2', 'Teacher'),
+            'user_id' => Yii::t('app.c2', 'Teacher'),
+            'course_id' => Yii::t('app.c2', 'Course'),
             'date' => Yii::t('app.c2', 'Course Date'),
             'time' => Yii::t('app.c2', 'Course Time'),
             'entrance_count' => Yii::t('app.c2', 'Course Entrance Count'),

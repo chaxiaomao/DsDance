@@ -53,14 +53,15 @@ $form = ActiveForm::begin([
             'columns' => 1,
             'attributes' => [
                 // 'registration_src_type' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => []],
-                'username' => ['type' => Form::INPUT_TEXT, 'options' => [
-                    'placeholder' => $model->getAttributeLabel('username'),
-                    'value' => $user->username
-                ]],
+                // 'user_id' => ['type' => Form::INPUT_TEXT, 'options' => [
+                //     'disable' => true,
+                //     'placeholder' => $model->getAttributeLabel('user_id'),
+                //     'value' => $user->username
+                // ]],
                 'card_id' => ['type' => Form::INPUT_DROPDOWN_LIST, 'items' => \common\models\c2\entity\CardModel::getCards()],
             ]
         ]);
-        echo $form->field($model, 'user_id', [])->label(false)->hiddenInput(['value' => $user->id]);
+        echo $form->field($model, 'user_id', [])->label(false)->hiddenInput(['value' => $user_id]);
         echo Html::beginTag('div', ['class' => 'box-footer']);
         echo Html::submitButton('<i class="fa fa-save"></i> ' . Yii::t('app.c2', 'Save'), ['type' => 'button', 'class' => 'btn btn-primary pull-right']);
         echo Html::endTag('div');

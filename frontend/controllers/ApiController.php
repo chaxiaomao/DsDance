@@ -43,20 +43,42 @@ class ApiController extends Controller
                 'time' => $model->time,
                 'teacher' => $model->user->username,
                 'remain' => $model->remain, // 已预约人数
-                'is_entrance' => false, // 是否预约过
+                'is_entrance' => 0, // 是否预约过
             ];
             if ($records) {
                 foreach ($records as $record) {
                     if ($record->daily_course_id == $model->id) {
-                        $params['is_entrance'] = true;
+                        $params['is_entrance'] = 1;
                     }
-                    array_push($data, $params);
                 }
-            } else {
-                array_push($data, $params);
             }
+            array_push($data, $params);
         }
         return ['code' => '000', 'data' => $data];
+    }
+
+    public function actionCancel()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $daily_course_id = Yii::$app->request->post('daily_course_id');
+        $user_id = Yii::$app->request->post('user_id');
+        $record = UserEntranceModel::findOne(['user_id' => $user_id, 'daily_course_id' => $daily_course_id]);
+        $transaction = Yii::$app->db->beginTransaction();
+        if ($record->delete()) {
+            $dailyCourse = DailyCourseModel::findOne(['id' => $daily_course_id]);
+            $dailyCourse->remain -= 1;
+            if ($dailyCourse->save()) {
+                $business = UserBusinessModel::findOne(['user_id' => $user_id]);
+                $business->remain += 1;
+                if ($business->save()) {
+                    $transaction->commit();
+                    return ['code' => '000', 'data' => true, 'message' => '操作成功'];
+                } else {
+                    $transaction->rollBack();
+                    return ['code' => '501', 'data' => false, 'message' => '操作失败'];
+                }
+            }
+        }
     }
 
     public function actionSign()
@@ -80,9 +102,8 @@ class ApiController extends Controller
         }
         $user = FeUserModel::findOne(['id' => $user_id, 'status' => EntityModelStatus::STATUS_ACTIVE]);
         if (!$user) {
-            return ['code' => '501', 'data' => false, 'message' => '抱歉，您的会员已到期'];
+            return ['code' => '501', 'data' => false, 'message' => '抱歉，用户不存在'];
         }
-        $daily_course_id = Yii::$app->request->post('daily_course_id');
         $business = UserBusinessModel::findOne(['user_id' => $user_id]);
         if (strtotime(time()) > strtotime($business->period)) {
             return ['code' => '501', 'data' => false, 'message' => '抱歉，您的会员已到期'];
@@ -90,6 +111,11 @@ class ApiController extends Controller
         if ($business->remain == 0) {
             return ['code' => '501', 'data' => false, 'message' => '抱歉，您的预约次数不足'];
         }
+        $daily_course_id = Yii::$app->request->post('daily_course_id');
+        // $record = UserEntranceModel::findOne(['user_id' => $user_id, 'daily_course_id' => $daily_course_id]);
+        // if ($record) {
+        //     return ['code' => '501', 'data' => false, 'message' => '请勿重复报名'];
+        // }
         $dailyCourseModel = DailyCourseModel::findOne(['id' => $daily_course_id]);
         if (strtotime($dailyCourseModel->date) == strtotime(date('y-m-d', time()))) {
             // 当天日期

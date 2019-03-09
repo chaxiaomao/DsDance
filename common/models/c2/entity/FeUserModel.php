@@ -148,7 +148,7 @@ class FeUserModel extends \cza\base\models\ActiveRecord
             ]);
             $business->save();
         } else {
-            $model->remain = Yii::$app->request->post()[basename(get_class($this))]['remain'];
+            $model->remain = Yii::$app->request->post()['FeUserModel']['remain'];
             $model->save();
         }
 

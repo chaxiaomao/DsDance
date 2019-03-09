@@ -43,12 +43,12 @@ class ApiController extends Controller
                 'time' => $model->time,
                 'teacher' => $model->user->username,
                 'remain' => $model->remain, // 已预约人数
-                'is_entrance' => 0, // 是否预约过
+                'is_entrance' => $model->remain == $model->entrance_count ? 2 : 0, // 2:满人 0未满
             ];
             if ($records) {
                 foreach ($records as $record) {
                     if ($record->daily_course_id == $model->id) {
-                        $params['is_entrance'] = 1;
+                        $params['is_entrance'] = 1; // 已预约
                     }
                 }
             }

@@ -100,7 +100,7 @@ class ApiController extends Controller
         if (is_null($user_id)) {
             return ['code' => '501', 'data' => false, 'message' => '请先验证手机号码'];
         }
-        $user = FeUserModel::findOne(['id' => $user_id, 'status' => EntityModelStatus::STATUS_ACTIVE]);
+        $user = FeUserModel::find()->where(['id' => $user_id, 'status' => EntityModelStatus::STATUS_ACTIVE])->one();
         if (!$user) {
             return ['code' => '501', 'data' => false, 'message' => '抱歉，用户不存在'];
         }

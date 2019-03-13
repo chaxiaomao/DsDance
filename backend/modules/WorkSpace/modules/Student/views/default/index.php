@@ -72,6 +72,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                 [
+                    'label' => '预约记录',
+                    'format' => 'html',
+                    'value' => function ($model) {
+                        return Html::a('预约记录', Url::toRoute(['/work-space/user-entrance/default/index', 'UserEntranceSearch[user_id]' => $model->id]));
+                    },
+                ],
+                [
                     'label' => '到期时间',
                     'value' => function ($model) {
                         return $model->userBusiness == null ? '未设置' : date('Y-m-d', strtotime($model->userBusiness->period));

@@ -106,7 +106,7 @@ class ApiController extends Controller
         }
         $business = UserBusinessModel::findOne(['user_id' => $user_id]);
         if (date('y-m-d h:i:s') > $business->period) {
-            return ['code' => '501', 'data' => ['time' => strtotime(time()), 'time2' => strtotime($business->period) ], 'message' => '抱歉，您的会员已到期'];
+            return ['code' => '501', 'data' => false, 'message' => '抱歉，您的会员已到期'];
         }
         if ($business->remain == 0) {
             return ['code' => '501', 'data' => false, 'message' => '抱歉，您的预约次数不足'];

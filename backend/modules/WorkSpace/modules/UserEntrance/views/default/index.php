@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '课程日期',
                 'value' => function($model) {
                     $dailyCourseModel = $model->dailyCourse;
-                    return $dailyCourseModel ? "未设置" : date('Y-m-d', strtotime($dailyCourseModel->date));
+                    return $dailyCourseModel== null ? "未设置" : date('Y-m-d', strtotime($dailyCourseModel->date));
                 },
             ],
             [
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '课程时间',
                 'value' => function($model) {
                     $dailyCourseModel = $model->dailyCourse;
-                    return $dailyCourseModel ? "未设置" : $dailyCourseModel->time;
+                    return $dailyCourseModel == null ? "未设置" : $dailyCourseModel->time;
                 },
             ],
             // 'status',

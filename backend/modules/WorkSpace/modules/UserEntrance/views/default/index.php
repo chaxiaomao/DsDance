@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'daily_course_id',
                 'value' => function($model) {
                     $dailyCourseModel = $model->dailyCourse;
-                    return $dailyCourseModel->course == null ? "未设置" : $dailyCourseModel->course->name;
+                    return $dailyCourseModel == null ? "未设置" : $dailyCourseModel->course->name;
                 },
             ],
             // 'user_id',
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '课程日期',
                 'value' => function($model) {
                     $dailyCourseModel = $model->dailyCourse;
-                    return $dailyCourseModel== null ? "未设置" : date('Y-m-d', strtotime($dailyCourseModel->date));
+                    return $dailyCourseModel ? "未设置" : date('Y-m-d', strtotime($dailyCourseModel->date));
                 },
             ],
             [
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '课程时间',
                 'value' => function($model) {
                     $dailyCourseModel = $model->dailyCourse;
-                    return $dailyCourseModel == null ? "未设置" : $dailyCourseModel->time;
+                    return $dailyCourseModel ? "未设置" : $dailyCourseModel->time;
                 },
             ],
             // 'status',
